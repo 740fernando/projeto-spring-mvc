@@ -1,6 +1,7 @@
 package br.com.alura.mvc.mudi.repository;
 
 import br.com.alura.mvc.mudi.model.Pedido;
+import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;
@@ -9,21 +10,17 @@ import javax.persistence.Query;
 import java.util.List;
 
 @Repository
-public class PedidoRepository {
+public interface  PedidoRepository extends JpaRepository<Pedido,Long> {
 
-    @PersistenceContext
-    private EntityManager entityManager;
-
-    public List<Pedido> recuperaTodosPedidos () {
-
-        Query query = entityManager.createQuery("select p from Pedido p", Pedido.class);
-        return query.getResultList();
-    }
 }
+
 /**
- * A “PedidoRepository” tem dependências que tem haver com repositório mesmo, com o fato do que ela é.
- * Por exemplo: ela precisa do um “EndityManager” que ela vai usar para acessar o repositório e tem
- * dependência de uma classe de negócio, a classe “Pedido”. Eu acho que em termos de dependências está
- * bom também. Ou seja, a nossa aplicação está bem organizada - e aí é interessante, veja que não estamos
- * precisando criar instâncias de “PedidoRepository”.
+ Para que esse “PedidoRepository” funcione integrado com o Spring Data, nós precisamos estender uma interface
+ chamada de “JpaRepository” e ela precisa de dois tipos genéricos. Um é o tipo que ele está lidando, estou
+ lindando com “Pedido”. O outro é o “ID” que é utilizado na classe “Pedido”. Se você for olhar, o tipo do
+ “ID” é “Long”. Então você tem que definir esse aqui como tipo “Long”.
+ ó que na hora que você estende “JpaRepository”, você vai herdar algumas definições de métodos que ele já tem.
+ Uma delas é o próprio “findAll”. Nós nem sequer precisamos do método “findAll”. Então na classe “homeController”
+ , nós em vez de chamarmos “recuperaTodosOsPedidos”, nós fazemos um “findAll”, que significa basicamente a mesma
+ coisa. Principalmente se o nome do “Repository” deixar mais claro.
 */
