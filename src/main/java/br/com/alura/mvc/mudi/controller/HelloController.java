@@ -20,7 +20,7 @@ import javax.servlet.http.HttpServletRequest;
 @Controller
 public class HelloController {
 
-    @GetMapping("/hello")
+    @GetMapping("/hello")// método que atende uma requisição HTTP
     public String hello(Model model){
         model.addAttribute("nome","Mundo");
         return "hello";
