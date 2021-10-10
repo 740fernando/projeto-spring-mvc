@@ -28,15 +28,25 @@ public class HomeController {
     @Autowired
     private PedidoRepository pedidoRepository;
 
+    /**
+     *  preciso receber o modelo através do Model que recebemos como parâmetro e é preciso definir o nome da
+     *  view no retorno do método. Veja a estrutura básica da nossa action:
+     *
+     */
+
     @GetMapping("/home")
     public String home(Model model){
         List<Pedido> pedidos = pedidoRepository.findAll();
         model.addAttribute("pedidos",pedidos);
-        return "home";
+        return "home"; //preciso definir o nome da view no retorno do método.
     }
 }
 
 /**
+ * Ou seja, para trabalhar com uma página, é preciso definir um ModeloEPagina e para tal existe uma classe
+ * justamente com esse nome: ModelAndView. Veja a mesma action, mas usando ModelAndView do Spring MVC:
+ *
+ *
  Por exemplo: se fizermos um “pedidoRepository.findAll”, claramente ele vai retornar uma lista de todos
  os pedidos. Então pronto, é só isso! Veja que é bem mais simples. Não precisa nem daquela lista. Você
  vê que as dependências agora são para duas classes do Spring Data JPA. Quer dizer, é a “Repository”, a
