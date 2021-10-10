@@ -1,0 +1,37 @@
+<html>
+    <head>
+        <meta chartset="UTF-8"/>
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    </head>
+    <body>
+    <!--“container” é centraliza o conteudo e eh rendimensionado conforme o disp-->
+        <div class="container">
+            <div class="jumbotron mb-0">
+                <h1 class="display-4">Novo Pedido</h1>
+                <!-- Vamos no site do Bootstrap, entramos na documentação e aqui tem os componentes. O componente para criarmos menus é esse “Navbar” e aí tem vários exemplos que podemos usar.-->
+            </div>
+            <form action="/pedido/novo" method="POST">
+                <div>
+                    <label for="nomeProduto">Produto</label>
+                    <input name="nomeProduto" placeholder="nome do produto"/>
+                    <small>Informa qual o nome do produto</small>
+                </div>
+                <div>
+                    <label for="urlProduto">url</label>
+                    <input name="urlProduto" placeholder="url da imagem"/>
+                    <small>Procue no site o produto que você deseja e cole a url da página aqui</small>
+                </div>
+                <div>
+                    <label for="urlImagem">imagem</label>
+                    <input name="urlImagem" placeholder="url da imagem"/>
+                    <small>Copie a url de uma boa imagem do produto e cole aqui para ajudar a conseguir compradores</small>
+                </div>
+                <div>
+                    <label for="descricao">Descricao</label>
+                    <textarea name="descricao" placeholder="Adicione detalhes importantes para ajudar o comprador"></textarea>
+                </div>
+                <button type="submit">Cadastrar</button>
+            </form>
+        </div>
+    </body>
+</html>
