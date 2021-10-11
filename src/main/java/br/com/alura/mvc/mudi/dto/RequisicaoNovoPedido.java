@@ -2,13 +2,24 @@ package br.com.alura.mvc.mudi.dto;
 
 import br.com.alura.mvc.mudi.model.Pedido;
 import lombok.Data;
+
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
+
+
 //Os atributos vão ter os nomes que eu estou mandando na requisição.
 @Data
 public class RequisicaoNovoPedido {
 
+    @NotBlank
     private String nomeProduto;
+
+    @NotBlank
     private String urlProduto;
+
+    @NotBlank
     private String urlImagem;
+
     private String descricao;
 
     public Pedido toPedido() {
