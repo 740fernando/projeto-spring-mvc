@@ -44,7 +44,7 @@ public class PedidoController {
         }
         Pedido pedido = requisicao.toPedido(); //Basicamente, estamos convertendo uma requisição de “novo Pedido” para um “pedido” novo mesmo
         pedidoRepository.save(pedido);
-        return "pedido/formulario";
+        return "redirect:/home";
     }
 }
 /**

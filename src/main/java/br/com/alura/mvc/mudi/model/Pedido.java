@@ -15,13 +15,12 @@ public class Pedido {
 
     private String nomeProduto;
     private BigDecimal valorNegociado;
-    private LocalDate dateEntrega = LocalDate.now();
-
-
+    private LocalDate dateEntrega;
     private String urlProduto;
-
     private String urlImagem;
-
     private String descricao;
+
+    @Enumerated(EnumType.STRING)
+    private StatusPedido status;
 
 }
