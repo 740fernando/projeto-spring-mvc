@@ -13,10 +13,12 @@
         <div th:replace="~{base :: titulo('Meus Pedidos')}"></div>
         <nav class="navbar navbar-expand navbar-light bg-light d-flex justify-content-between mb-3" >
             <div class="navbar-nav">
-                <a class="nav-item nav-link active"  href="">Todos</a>
-                <a class="nav-link" href="#">Aguardando</a>
-                <a class="nav-link" href="#">Aprovado</a>
-                <a class="nav-link disabled">Entregue</a>
+                <!-- th:classappend= Exibe o status 'active' em destaque. exemplo :
+                Se “status” for igual a “aguardando” eu adiciono a classe “active”. Então eu uso esse “classappend”. !-->
+                <a th:classappend="${status} == null ? 'active'" class="nav-item nav-link"  href="/home">Todos</a>
+                <a th:classappend="${status} == 'aguardando' ? 'active'" class="nav-item nav-link" href="/home/aguardando">Aguardando</a>
+                <a th:classappend="${status} == 'aprovado' ? 'active'" class= "nav-item nav-link" href="/home/aprovado">Aprovado</a>
+                <a th:classappend="${status} == 'entregue' ? 'active'" class="nav-item nav-link" href="/home/entregue">Entregue</a>
             </div>
             <a href="/pedido/formulario"><button class="btn btn-outline-secundary">Novo</button></a>
         </nav>

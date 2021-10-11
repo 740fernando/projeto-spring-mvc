@@ -1,6 +1,7 @@
 package br.com.alura.mvc.mudi.repository;
 
 import br.com.alura.mvc.mudi.model.Pedido;
+import br.com.alura.mvc.mudi.model.StatusPedido;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
@@ -12,6 +13,7 @@ import java.util.List;
 @Repository
 public interface  PedidoRepository extends JpaRepository<Pedido,Long> {
 
+    List<Pedido> findByStatus(StatusPedido aguardando);
 }
 
 /**
@@ -23,4 +25,10 @@ public interface  PedidoRepository extends JpaRepository<Pedido,Long> {
  Uma delas é o próprio “findAll”. Nós nem sequer precisamos do método “findAll”. Então na classe “homeController”
  , nós em vez de chamarmos “recuperaTodosOsPedidos”, nós fazemos um “findAll”, que significa basicamente a mesma
  coisa. Principalmente se o nome do “Repository” deixar mais claro.
+
+
+ “findByStatus” - ele sabe que tem que adicionar um filtro, um “[WHERE]” onde “status” é igual ao “status”
+ que estamos passando aqui. Não vou colocar “aguardando”, vou colocar “status”. Então o próprio Spring Data
+ JPA vai conseguir implementar esse “select” para nós. Essa é uma das grandes vantagens de utilizar o
+ Spring Data, porque ele simplifica bastante essa consulta.
 */
