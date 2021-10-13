@@ -26,7 +26,7 @@ Se você não quiser usar HTTP POST, tem que usar outro método chamado de logou
 passando essa sintaxe aqui.
  */
     @Autowired
-    private DataSource dataSource;
+    private DataSource dataSource; // dataSource, que é onde ele consegue conexões com o banco de dados
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
@@ -44,9 +44,9 @@ passando essa sintaxe aqui.
     @Override
     protected void configure(AuthenticationManagerBuilder auth)throws Exception{
 
-        BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
+        BCryptPasswordEncoder encoder = new BCryptPasswordEncoder(); //um encoder bem forte, com senhas bem fortes; vai deixar nossa aplicação com uma boa segurança.
 
-        /**
+        /** cria o usuario
         UserDetails user=
              User.builder()
                 .username("root")
@@ -58,37 +58,9 @@ passando essa sintaxe aqui.
 
         auth.jdbcAuthentication()
                 .dataSource(dataSource)
-                .passwordEncoder(encoder);
+                .passwordEncoder(encoder);//passwordEncoder, que é quem vai criptografar a senha
                 //.withUser(user);
 
     }
-  /*  @Bean
-    @Override
-    public UserDetailsService userDetailsService() {
-        UserDetails user =
-                User.withDefaultPasswordEncoder()
-                        .username("root")
-                        .password("root")
-                        .roles("ADM")
-                        .build();
-
-        return new InMemoryUserDetailsManager(user);
-    }*/
 
 }
-/**
- *  WebSecurityConfigurerAdapter, ele está dentro do próprio Spring Security, ou seja, é uma classe que
- *  vai nos ajudar a integrar nossa aplicação com Spring Security e ele também nos oferece uma anotação
- *  aqui para fazermos inicialização junto da camada de segurança da nossa aplicação.
- *  Ele está dizendo que ele está utilizando esse "http" e está chamando esse .authorizeRequests(),
- *  e que tudo o que for ("/", "/home") ele está permitindo tudo e qualquer outro request a pessoa tem
- *  que estar autenticada - ou seja, ele está dizendo que nesse exemplo o "/home" é público, a pessoa não
- *  precisa estar autenticada.
- *
- *  Com isso, nos foi disponibilizado todas as classes necessárias para configurar o módulo de segurança:
- *  utilizamos um adapter (WebSecurityConfigurerAdapter), que vem com várias configurações default. Apenas
- *  duas destas configurações nós precisamos reimplementar: configure(HttpSecurity) e configure(Authentica
- *  tionManagerBuilder auth). Utilizamos uma anotação (@EnableWebSecurity) que disponibiliza todas as depen-
- *  dências do Spring Security que precisamos para configurá-lo conforme a necessidade do nosso projeto;
- *  além disso, ganhamos alguns builders, que nos permitiu criar usuários e configurar a autorização.
- */

@@ -23,4 +23,7 @@ public class Pedido {
     @Enumerated(EnumType.STRING)
     private StatusPedido status;
 
+    @ManyToOne(fetch = FetchType.LAZY)//muitos pedidos vai ter apenas um usuário
+    private User user;
+
 }
