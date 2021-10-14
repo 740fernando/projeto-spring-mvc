@@ -1,6 +1,8 @@
 <html xmlns:th="http://www.w3.org/1999/xhtml">
     <head th:replace="~{base :: head}"></head>
+
     <body>
+    <div th:replace="~{base :: logo}"></div>
     <!-- d-flex justify-content-between responsável por separar o mudi e o  login em cada canto da dela !-->
     <div class="logo-container mb-3 p-3 d-flex justify-content-between">
         <span class="logo">mudi</span>
@@ -13,7 +15,7 @@
             <div class="card mt-3">
                 <!--action -> aplicação através de um “controller” que vai receber as requisições e vai redirecionar essas requisições para uma “action” especifica que sabe qual modelo deve ser utilizado e qual classe de serviços da nossa aplicação deve ser utilizada para responder o usuário!-->
                 <!-- th:object="$(requisicaoNovoPedido)" - associa o formulario a objeto !-->
-                <form th:object="${requisicaoNovoPedido}" class="card-body" action="/pedido/novo" method="POST">
+                <form action="@{/pedido/novo}" th:object="${requisicaoNovoPedido}" class="card-body"  method="POST">
                     <div class="form-group">
                         <!-- Spring olha o parâmetro name do input, e com isso ele sabe qual atributo é o certo para popular
                         “th:field” - automaticamente vai criar os atributos “name id” e vai gerenciar o “value” desse aqui. !-->
