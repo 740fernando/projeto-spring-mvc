@@ -5,6 +5,8 @@ import br.com.alura.mvc.mudi.model.StatusPedido;
 import br.com.alura.mvc.mudi.repository.PedidoRepository;
 import org.dom4j.rule.Mode;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -29,16 +31,11 @@ public class HomeController {
 
     @GetMapping
     public String home(Model model,Principal principal){
-        List<Pedido> pedidos = pedidoRepository.findByStatus(StatusPedido.ENTREGUE); // Usuarios que nao estiverem logado, irão visualizar apenas os pedidos entregues
+        Sort sort = Sort.by("dateEntrega").descending(); // ordena por data descendente
+        PageRequest paginacao = PageRequest.of(0,10,sort);// define quantas informações ira aparecer na view
+        List<Pedido> pedidos = pedidoRepository.findByStatus(StatusPedido.ENTREGUE,paginacao); // Usuarios que nao estiverem logado, irão visualizar apenas os pedidos entregues
         model.addAttribute("pedidos",pedidos);
         return "home";
-    }
-    //Existe uma anotação chamada de “@ExceptionHandler”, onde nós passamos qual é a
-    // exceção que queremos mapear. É a “IllegalArgumentException”
-    @ExceptionHandler(IllegalArgumentException.class)
-    public String onError(){
-
-        return "redirect:/usuario/home";
     }
 }
 /**
