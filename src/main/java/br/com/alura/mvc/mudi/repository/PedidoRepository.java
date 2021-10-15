@@ -38,4 +38,10 @@ public interface  PedidoRepository extends JpaRepository<Pedido,Long> {
  que estamos passando aqui. Não vou colocar “aguardando”, vou colocar “status”. Então o próprio Spring Data
  JPA vai conseguir implementar esse “select” para nós. Essa é uma das grandes vantagens de utilizar o
  Spring Data, porque ele simplifica bastante essa consulta.
-*/
+
+ /**
+ * Então já fizemos o select pedido pelo username, colocamos um and aqui e digitamos p.status :status.
+ * Esse @Query("select p from Pedido p join p.user u where u.username = :username and p.status :status)
+ * vai estar mapeado para esse atributo, status, e o primeiro vai estar mapeado para esse daqui, username
+ */
+
