@@ -19,3 +19,8 @@ public class User {
     private List<Pedido> pedidos;
 }
 
+/**
+ *  Nenhuma classe da nossa aplicação tem qualquer dependência com o Spring Security.
+ *  A classe User, que usamos para mapear a tabela usada pelo Spring Security, pode ser alterada conforme
+ *  a necessidade da nossa aplicação.
+ */

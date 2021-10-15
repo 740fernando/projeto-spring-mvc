@@ -36,7 +36,7 @@ passando essa sintaxe aqui.
                 .and()
                 .formLogin(form -> form
                         .loginPage("/login")
-                        .defaultSuccessUrl("/home", true) // essa linha que vai resolver seu problema, ela define qual é a página padrão da sua aplicação, então sempre que você logar ele vai te direcionar para a /home
+                        .defaultSuccessUrl("/usuario/pedido", true) // essa linha que vai resolver seu problema, ela define qual é a página padrão da sua aplicação, então sempre que você logar ele vai te direcionar para a /home
                         .permitAll()
                 ).logout(logout -> logout.logoutUrl("/logout")
                 ).csrf().disable();

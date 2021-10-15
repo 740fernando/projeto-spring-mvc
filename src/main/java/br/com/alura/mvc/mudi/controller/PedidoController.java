@@ -48,7 +48,7 @@ public class PedidoController {
         if(result.hasErrors()){
             return "pedido/formulario";
         }
-
+        //buscar o usuário associado à requisição
         String username = SecurityContextHolder.getContext().getAuthentication().getName(); //que nos dá essa informação através desse getAuthentication(). Então getContext de segurança, getAuthentication, os dados do usuário mesmo e você pode pedir, através do método getName() o username do usuário. Vou criar até uma variável aqui chamada de username
         User user = userRepository.findByUsername(username);
 
@@ -66,4 +66,8 @@ public class PedidoController {
  * “/pedido/novo”. Eu vou criar o método “public String” porque depois esse “String”, esse retorno tem
  * haver com a página que vai aparecer depois que eu salvar o pedido. Vamos ver isso depois também.
  * Então, “novo()
+ *
+ * Esta classe foi utilizada no controller de pedidos apenas para buscar o usuário associado à requisição.
+ * Nenhuma classe Repository, nem a classe Pedido, nem User conhece a SpringContextHolder. Portanto, o modelo
+ * da aplicação Mudi (Repository, Pedido e User) desconhece o Spring Security.
  */
