@@ -29,3 +29,17 @@ public class PedidoRest {
     }
 
 }
+/**
+ * Qual a diferença da nossa antiga implementação MVC com Spring e Thymeleaf para a funcionalidade REST que acabamos de desenvolver?
+ *
+ *
+ *A diferença é que a nossa aplicação não é mais responsável pela camada de visão.
+ * De fato, a nossa aplicação em Java com Spring apenas está processando o comportamento e retornando os
+ * dados, mas não se preocupa mais em gerar a visão: o HTML
+ *
+ *  aprendemos como:
+ * Criar um controlador específico para requisições REST
+ * Usar o conceito REST para construir uma API devolvendo JSON
+ * Usamos a anotação @RestController
+ * Vimos que o Spring gera automaticamente o JSON
+ */
