@@ -6,6 +6,7 @@ import lombok.Data;
 import javax.persistence.*;
 import java.math.BigDecimal;
 import java.time.LocalDate;
+import java.util.List;
 
 
 @Entity
@@ -28,8 +29,8 @@ public class Pedido {
     @JsonIgnore
     private User user;
 
-
-
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "pedido", fetch = FetchType.LAZY)
+    private List<Oferta> ofertas;
 
     public String getNomeProduto() {
         return nomeProduto;
@@ -43,11 +44,11 @@ public class Pedido {
     public void setValorNegociado(BigDecimal valorNegociado) {
         this.valorNegociado = valorNegociado;
     }
-    public LocalDate getDataDaEntrega() {
+    public LocalDate getDateEntrega() {
         return dateEntrega;
     }
-    public void setDataDaEntrega(LocalDate dataDaEntrega) {
-        this.dateEntrega = dataDaEntrega;
+    public void setDateEntrega(LocalDate dateEntrega) {
+        this.dateEntrega = dateEntrega;
     }
     public String getUrlProduto() {
         return urlProduto;
@@ -86,4 +87,11 @@ public class Pedido {
         this.user = user;
     }
 
+    public List<Oferta> getOfertas() {
+        return ofertas;
+    }
+
+    public void setOfertas(List<Oferta> ofertas) {
+        this.ofertas = ofertas;
+    }
 }
