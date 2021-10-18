@@ -1,11 +1,12 @@
 package br.com.alura.mvc.mudi.model;
 
+import com.fasterxml.jackson.annotation.*;
 import lombok.Data;
 
 import javax.persistence.*;
 import java.util.List;
 
-@Data
+
 @Entity
 @Table(name="users")
 public class User {
@@ -16,7 +17,27 @@ public class User {
     private Boolean enabled;
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "user", fetch= FetchType.LAZY)
+    @JsonIgnore
     private List<Pedido> pedidos;
+
+    public String getUsername() {
+        return username;
+    }
+    public void setUsername(String username) {
+        this.username = username;
+    }
+    public String getPassword() {
+        return password;
+    }
+    public void setPassword(String password) {
+        this.password = password;
+    }
+    public Boolean getEnabled() {
+        return enabled;
+    }
+    public void setEnabled(Boolean enabled) {
+        this.enabled = enabled;
+    }
 }
 
 /**

@@ -7,7 +7,11 @@
  Ou seja, vamos fazer esse mesmo for each, só que na sintaxe do Vue.js.
  Para cada pedido que eu encontrar nesse array, eu vou montar um formulário onde o
  usuário vai poder setar valor, data de entrega e gerar uma oferta.
-  Ele vai clicar no botão lá e vai fazer uma requisição de oferta!-->
+  Ele vai clicar no botão lá e vai fazer uma requisição de oferta!
+
+  Agora estamos consumido o JSON da nossa aplicação, com o Vue.js e com o Axios,
+  estamos fazendo uma consulta em nossa API REST. São novas siglas para lidarmos no nosso dia a dia
+  -->
 <body onload="onLoad()">
 <div th:replace="~{base :: logo}"></div>
 
@@ -42,29 +46,36 @@
         </div>
     </div>
 </div>
-<!--  funcao Vue.js vai ser invocada depois de cada pagina ser invocada !-->
+<!--  funcao Vue.js vai ser invocada depois de cada pagina ser invocada
+
+Para fazermos essa requisição com Axios é só copiarmos esse código,
+.get('https://api.coindesk.com/v1/bpi/currentprice.json'), é um get,
+é exatamente isso mesmo que queremos fazer. E aqui, .then(response => (this.info = response)),
+ele está adicionando a resposta do this.info - que é quem? Esse aqui que está no data,
+que no nosso caso é pedidos
+
+] E quando ele nos responder, then, nós recebemos uma resposta. Vamos o quê? Vamos adicionar em pedidos,
+então é this.pedidos.response. O this automaticamente nos permite acessar o data
+!-->
 <script>
-            function onLoad(){
-                var app = new Vue({
-                el: '#ofertas',
-                data: {
-                 pedidos : [
-                            {
-                           "id":43,
-                           "nomeProduto":"Pizza MUSSARELA",
-                           "valorNegociado":null,
-                           "dateEntrega":null,
-                           "urlProduto":"https://blog.ceraflame.com.br/pizza-napolitana/",
-                           "urlImagem":"https://img.itdg.com.br/tdg/images/recipes/000/105/489/188136/188136_original.jpg?mode=crop&width=710&height=400",
-                           "descricao":"QUEIJO E TOMATE",
-                           "status":"AGUARDANDO"
-                            }]
-                          }
-                        });
-                       }
+        function onLoad(){
+            var app = new Vue({
+            el: '#ofertas',
+            data: {
+                pedidos : []
+             },
+             mounted() {
+                       axios
+                        .get('http://localhost:8080/api/pedidos/aguardando')
+                        .then(response => (this.pedidos = response.data))
+                        .catch(error => console.log(error))
+                      }
+                    });
+                   }
 
 </script>
 <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 </body>
 </html>
 
