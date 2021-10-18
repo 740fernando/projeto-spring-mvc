@@ -19,6 +19,11 @@ import java.util.List;
  *  do usuário, tempo de processamento e quais as páginas que são mais acessadas. Na verdade, quais as páginas
  *  mais acessadas, média de tempo são informações que geramos em cima do conteúdo que vamos guardar com o
  *  Interceptor
+ *
+ *  ! O controlador MVC continua cuidando dos dados da view e o redirecionamento, sem se preocupar como medir o tempo de execução. Cada classe com a sua responsabilidade.
+ *
+ * O interceptador é um dos padrões de projetos (Design Pattern) mais importantes do mundo Java e não é
+ * exclusividade do Spring. Eles também existem para EJB, CDI, JSF e vários outros frameworks do mundo Java!
  */
 
 public class InterceptadorDeAcessos extends HandlerInterceptorAdapter{

@@ -1,63 +1,44 @@
-<html xmlns:th="http://www.w3.org/1999/xhtml">
+<html>
+<head th:replace="~{base :: head}"></head>
+<body>
+<div th:replace="~{base :: logo}"></div>
 
-    <head th:replace="~{base :: head}"></head>
+<div class="container">
+    <div th:replace="~{base :: titulo('Novo Pedido')}"></div>
 
-    <body>
-    <div th:replace="~{base :: logo}"></div>
-    <!-- d-flex justify-content-between responsável por separar o mudi e o  login em cada canto da dela !-->
-<!--    <div class="logo-container mb-3 p-3 d-flex justify-content-between">
-        <span class="logo">mudi</span>
-        <span class="mt-3">login</span>-->
-    </div>
-    <!--“container” é centraliza o conteudo e eh rendimensionado conforme o disp-->
-        <div class="container">
-            <div th:replace="~{base :: titulo('Novo pedido')}"></div>
-            <!--mt-3- "margin top 3 "!-->
-            <div class="card mt-3">
-                <!--action -> aplicação através de um “controller” que vai receber as requisições e vai redirecionar essas requisições para uma “action” especifica que sabe qual modelo deve ser utilizado e qual classe de serviços da nossa aplicação deve ser utilizada para responder o usuário!-->
-                <!-- th:object="$(requisicaoNovoPedido)" - associa o formulario a objeto !-->
-                <form action="@{/pedido/novo}" th:object="${requisicaoNovoPedido}" class="card-body"  method="POST">
-                    <div class="form-group">
-                        <!-- Spring olha o parâmetro name do input, e com isso ele sabe qual atributo é o certo para popular
-                        “th:field” - automaticamente vai criar os atributos “name id” e vai gerenciar o “value” desse aqui. !-->
-                        <label for="nomeProduto">Produto</label>
-                        <!-- th:field=*{nomeProduto} O asterisco nos permite acessar um atributo desse objeto. Então como eu associei
-                        esse formulário a esse objeto, e eu quero associar esse “input” a um atributo desse
-                        objeto, eu uso o asterisco!-->
-                        <input th:field="*{nomeProduto}" th:errorclass="is-invalid" class="form-control " placeholder="nome do produto"/>
-                        <small>Informe qual o nome do produto</small>
-                        <div class="invalid-feedback" th:errors="*{nomeProduto}">
-                            Erro do nomeProduto
-                        </div>
-                    </div>
-                    <div  class="form-group">
-                        <label for="urlProduto">url</label>
-                        <input th:field="*{urlProduto}" th:errorclass="is-invalid" class="form-control" placeholder="url da produto"/>
-                        <small>Procure no site o produto que você deseja e cole a url da página aqui</small>
-                        <div class="invalid-feedback" th:errors="*{urlProduto}">
-                            Erro Urlproduto
-                        </div>
-                    </div>
-
-                    <div>
-                        <label for="urlImagem">imagem</label>
-                        <input th:field="*{urlImagem}" th:errorclass="is-invalid" class="form-control" placeholder="url da imagem"/>
-                        <small>Copie a url de uma boa imagem do produto e cole aqui para ajudar a conseguir compradores</small>
-                        <div class="invalid-feedback" th:errors="*{urlImagem}">
-                            Erro urlImagem
-                        </div>
-                    </div>
-
-                    <div>
-                        <label for="descricao">Descricao</label>
-                        <textarea th:field="*{descricao}" th:errorclass="is-invalid" class="form-control" placeholder="Adicione detalhes importantes para ajudar o comprador"></textarea>
-                        <div class="invalid-feedback" th:errors="*{urlImagem}">
-                            Erro descricao
-                        </div>
-                    </div>
-                    <button class="btn btn-primary mt-3" type="submit">Cadastrar</button>
-                </form>
+    <div class="card mt-3">
+        <form th:action="@{/pedido/novo}" th:object="${requisicaoNovoPedido}" class="card-body" method="post">
+            <div class="form-group">
+                <label for="nomeProduto">Produto</label>
+                <input th:field="*{nomeProduto}" th:errorclass="is-invalid" class="form-control" placeholder="nome do produto"/>
+                <small>Informa qual o nome do produto.</small>
+                <div class="invalid-feedback" th:errors="*{nomeProduto}">
+                    Erros do nome do produto
+                </div>
             </div>
-        </div>
-    </body>
+            <div class="form-group">
+                <label for="urlProduto">Url</label>
+                <input th:field="*{urlProduto}" th:errorclass="is-invalid" class="form-control" placeholder="url do produto"/>
+                <small>Procure em um site o produto que você deseja e cole a url da página aqui.</small>
+                <div class="invalid-feedback" th:errors="*{urlProduto}">
+                    Erros da url do produto
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="urlImagem">Imagem</label>
+                <input th:field="*{urlImagem}" th:errorclass="is-invalid" class="form-control" placeholder="url da imagem"/>
+                <small>Copie a url de uma boa imagem do produto e cole aqui para ajudar a conseguir compradores.</small>
+                <div class="invalid-feedback" th:errors="*{urlImagem}">
+                    Erros dua url da imagem
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="descricao">Descricao</label>
+                <textarea th:field="*{descricao}" class="form-control" placeholder="Adicione detalhes importantes para ajudar o comprador"></textarea>
+            </div>
+            <button class="btn btn-primary" type="submit">Cadastrar</button>
+        </form>
+    </div>
+</div>
+</body>
 </html>

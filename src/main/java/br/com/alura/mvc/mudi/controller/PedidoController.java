@@ -36,6 +36,8 @@ public class PedidoController {
         return "pedido/formulario";
     }
 
+
+
     /**
      * através de um objeto do tipo “BindingResult”, vai nos dar o resultado dessa validação.
      * Se tiver erros, ele vai nos dar através de um método chamado “hasErrors”, vai nos dizer “true”
