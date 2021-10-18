@@ -15,6 +15,10 @@ import org.springframework.web.bind.annotation.RestController;
 import javax.validation.Valid;
 import java.util.Optional;
 
+    /*API's executam ações e devolvem informações, mas a renderização dessas
+     informações para o usuário é feita no navegador, usando JavaScript.
+     Consumimos API's, mais notadamente seguindo o padrão REST*/
+
 @RestController
 @RequestMapping("/api/ofertas")
 public class OfertasRest {
