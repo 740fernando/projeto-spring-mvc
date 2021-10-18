@@ -1,11 +1,13 @@
 package br.com.alura.mvc.mudi.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.Data;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
 import java.time.LocalDate;
-
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 @Data
 @Entity
 public class Oferta {
@@ -20,6 +22,7 @@ public class Oferta {
     private String comentario;
 
     @ManyToOne(fetch = FetchType.LAZY) //(fetch = FetchType.LAZY), para ele não carregar automaticamente quando buscar dados de ofertas e não carregar os dados do pedido também.
+    @JsonIgnore
     private Pedido pedido;
 
 }

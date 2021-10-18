@@ -31,6 +31,7 @@ passando essa sintaxe aqui.
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http
+                .csrf().disable()
                 .authorizeRequests()
                 .antMatchers("/home/**") //criado a excessão / home/** (permit all)
                     .permitAll()
