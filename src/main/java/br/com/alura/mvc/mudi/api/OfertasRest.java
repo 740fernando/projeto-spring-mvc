@@ -37,3 +37,15 @@ public class OfertasRest {
        return nova;
     }
 }
+/**
+ * ao pedido eu vou adicionar aqui no pedido.getOfertas, Criei getters e setters para os dois.
+ * Digito um getOfertas().add(nova); e a nova oferta. Associei um com o outro e a única coisa
+ * que eu preciso fazer é salvar o pedido. Então pedidoRepository.save e passo o (pedido);
+ *
+ *  "Mas eu não preciso salvar a oferta também?" Não precisa, automaticamente ele já vai na hora em que
+ *  você salvar o pedido. Como ele está com cascade all ele já vai salvar também para persistence. Nós vamos
+ *  persistir isso. Eu só digito um return nova;
+ *
+ * Então já temos o endpoint que conseguimos salvar a oferta.
+ *
+ */
