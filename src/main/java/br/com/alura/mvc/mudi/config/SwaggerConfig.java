@@ -39,7 +39,8 @@ public class SwaggerConfig {
                 .apis(RequestHandlerSelectors.basePackage("br.com.alura.mvc.mudi.controller"))
                 .apis(RequestHandlerSelectors.any())
                 .paths(PathSelectors.any())
-                .build();
+                .build()
+                .apiInfo(buildApInfo());
     }
 
 
