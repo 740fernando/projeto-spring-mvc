@@ -40,7 +40,7 @@ passando essa sintaxe aqui.
                 .and()
                 .formLogin(form -> form
                         .loginPage("/login")
-                        .defaultSuccessUrl("/usuario/pedido", true) // essa linha que vai resolver seu problema, ela define qual é a página padrão da sua aplicação, então sempre que você logar ele vai te direcionar para a /caminho
+                        .defaultSuccessUrl("/usuario/pedido", false) // essa linha que vai resolver seu problema, ela define qual é a página padrão da sua aplicação, então sempre que você logar ele vai te direcionar para a /caminho
                         .permitAll()
                 ).logout(logout -> {
             logout.logoutUrl("/logout")
@@ -52,16 +52,13 @@ passando essa sintaxe aqui.
     protected void configure(AuthenticationManagerBuilder auth)throws Exception{
 
         BCryptPasswordEncoder encoder = new BCryptPasswordEncoder(); //um encoder bem forte, com senhas bem fortes; vai deixar nossa aplicação com uma boa segurança.
-
-        /** cria o usuario
-        UserDetails user=
-             User.builder()
-                .username("root")
-                .password(encoder.encode("root"))
-                .roles("ADM")
-                .build();
-         **/
-
+//         cria o usuario
+//        UserDetails user=
+//             User.builder()
+//                .username("root")
+//               .password(encoder.encode("root"))
+//               .roles("ADM")
+//                .build();
 
         auth.jdbcAuthentication()
                 .dataSource(dataSource)
