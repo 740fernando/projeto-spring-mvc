@@ -13,8 +13,3 @@ public class LoginController {
         return "login";
     }
 }
-/**
- *  Vou fazer um get para ele: @GetMapping e @RequestMapping("/login"). E aqui eu só crio o método public
- *  String login() {. return "login"; - representando o nome da página mesmo, que é essa página de login
- *  que nós temos agora.
- */

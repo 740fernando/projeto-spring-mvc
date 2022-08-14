@@ -2,10 +2,9 @@ package br.com.alura.mvc.mudi.api;
 
 
 import br.com.alura.mvc.mudi.dto.RequisicaoNovoOferta;
-import br.com.alura.mvc.mudi.dto.RequisicaoNovoPedido;
 import br.com.alura.mvc.mudi.model.Oferta;
 import br.com.alura.mvc.mudi.model.Pedido;
-import br.com.alura.mvc.mudi.repository.PedidoRepository;
+import br.com.alura.mvc.mudi.service.PedidoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -15,46 +14,25 @@ import org.springframework.web.bind.annotation.RestController;
 import javax.validation.Valid;
 import java.util.Optional;
 
-    /*API's executam ações e devolvem informações, mas a renderização dessas
-     informações para o usuário é feita no navegador, usando JavaScript.
-     Consumimos API's, mais notadamente seguindo o padrão REST*/
-
 @RestController
 @RequestMapping("/api/ofertas")
 public class OfertasRest {
 
     @Autowired
-    private PedidoRepository pedidoRepository;
+    private PedidoService pedidoService;
 
     @PostMapping
-    public Oferta criaOferta(@Valid @RequestBody RequisicaoNovoOferta requisicao){
+    public Oferta criaOferta(@Valid @RequestBody RequisicaoNovoOferta requisicao) {
+        Optional<Pedido> pedidoBuscado = pedidoService.findById(requisicao.getPedidoId());
+        return (!pedidoBuscado.isPresent()) ? null : getOferta(requisicao, pedidoBuscado);
+    }
 
-       Optional<Pedido> pedidoBuscado = pedidoRepository.findById(requisicao.getPedidoId());
-       if(!pedidoBuscado.isPresent()){
-           return null;
-       }
-       Pedido pedido = pedidoBuscado.get();
-
-       Oferta nova = requisicao.toOferta();
-       nova.setPedido(pedido);
-       pedido.getOfertas().add(nova);
-       pedidoRepository.save(pedido);
-
-       return nova;
+    private Oferta getOferta(RequisicaoNovoOferta requisicao, Optional<Pedido> pedidoBuscado) {
+        Pedido pedido = pedidoBuscado.get();
+        Oferta nova = requisicao.toOferta();
+        nova.setPedido(pedido);
+        pedido.getOfertas().add(nova);
+        pedidoService.save(pedido);
+        return nova;
     }
 }
-/**
- * ao pedido eu vou adicionar aqui no pedido.getOfertas, Criei getters e setters para os dois.
- * Digito um getOfertas().add(nova); e a nova oferta. Associei um com o outro e a única coisa
- * que eu preciso fazer é salvar o pedido. Então pedidoRepository.save e passo o (pedido);
- *
- *  "Mas eu não preciso salvar a oferta também?" Não precisa, automaticamente ele já vai na hora em que
- *  você salvar o pedido. Como ele está com cascade all ele já vai salvar também para persistence. Nós vamos
- *  persistir isso. Eu só digito um return nova;
- *
- * Então já temos o endpoint que conseguimos salvar a oferta.
- *
- *
- * @RequestBody-  é a anotação que indicamos exatamente isso, pega os dados da requisição e adiciona nesse aqui
- *
- */

@@ -3,7 +3,7 @@ package br.com.alura.mvc.mudi.controller;
 
 import br.com.alura.mvc.mudi.model.Pedido;
 import br.com.alura.mvc.mudi.model.StatusPedido;
-import br.com.alura.mvc.mudi.repository.PedidoRepository;
+import br.com.alura.mvc.mudi.service.PedidoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -19,30 +19,27 @@ import java.util.List;
 @RequestMapping("usuario")
 public class UsuarioController {
 
-
     @Autowired
-    private PedidoRepository pedidoRepository;
+    private PedidoService pedidoService;
 
     @GetMapping("pedido")//mapemaenta da url
-    public String home(Model model, Principal principal){
-        List<Pedido> pedidos = pedidoRepository.findAllByUsuario(principal.getName());
-        model.addAttribute("pedidos",pedidos);
+    public String home(Model model, Principal principal) {
+        List<Pedido> pedidos = pedidoService.findAllByUsuario(principal);
+        model.addAttribute("pedidos", pedidos);
         return "usuario/home";//mapeamento das pastas
     }
 
 
     @GetMapping("pedido/{status}")
-    public String porStatus(@PathVariable("status") String status, Model model,Principal principal){
-        List<Pedido> pedidos = pedidoRepository.findByStatusEUsuario(StatusPedido.valueOf(status.toUpperCase()),principal.getName()); //transforma essa String em um status pedido
-        model.addAttribute("pedidos",pedidos);
-        model.addAttribute("status",status);
-        return "usuario/home"; //preciso definir o nome da view no retorno do método.
+    public String porStatus(@PathVariable("status") String status, Model model, Principal principal) {
+        List<Pedido> pedidos = pedidoService.findByStatusEUsuario(StatusPedido.valueOf(status.toUpperCase()), principal.getName());
+        model.addAttribute("pedidos", pedidos);
+        model.addAttribute("status", status);
+        return "usuario/home";
     }
 
-    //Existe uma anotação chamada de “@ExceptionHandler”, onde nós passamos qual é a
-    // exceção que queremos mapear. É a “IllegalArgumentException”
     @ExceptionHandler(IllegalArgumentException.class)
-    public String onError(){
+    public String onError() {
 
         return "redirect:/usuario/home";
     }
