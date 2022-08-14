@@ -2,7 +2,7 @@ package br.com.alura.mvc.mudi.controller;
 
 import br.com.alura.mvc.mudi.model.Pedido;
 import br.com.alura.mvc.mudi.model.StatusPedido;
-import br.com.alura.mvc.mudi.repository.PedidoRepository;
+import br.com.alura.mvc.mudi.service.PedidoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
@@ -21,13 +21,13 @@ import java.util.List;
 public class HomeController {
 
     @Autowired
-    private PedidoRepository pedidoRepository;
+    private PedidoService pedidoService;
 
     @GetMapping
     public String home(Model model,Principal principal){
         Sort sort = Sort.by("dateEntrega").descending(); // ordena por data descendente
         PageRequest paginacao = PageRequest.of(0,10,sort);// define quantas informações ira aparecer na view
-        List<Pedido> pedidos = pedidoRepository.findByStatus(StatusPedido.ENTREGUE,paginacao); // Usuarios que nao estiverem logado, irão visualizar apenas os pedidos entregues
+        List<Pedido> pedidos = pedidoService.findByStatus(StatusPedido.ENTREGUE,paginacao); // Usuarios que nao estiverem logado, irão visualizar apenas os pedidos entregues
         model.addAttribute("pedidos",pedidos);
         return "home";
     }

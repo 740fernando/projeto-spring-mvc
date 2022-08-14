@@ -14,10 +14,8 @@ import java.util.List;
 @RestController
 public class AcessosRest {
 
-
     @GetMapping
     public List<Acesso> getAcessos(){
         return InterceptadorDeAcessos.acessos;
-
     }
 }

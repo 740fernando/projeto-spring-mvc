@@ -5,7 +5,6 @@ import br.com.alura.mvc.mudi.model.StatusPedido;
 import lombok.Data;
 
 import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
 
 
 //Os atributos vão ter os nomes que eu estou mandando na requisição.
